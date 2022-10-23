@@ -68,6 +68,9 @@ public:
 	static int DrawTimer(int index, ColorScheme *Scheme, int Time, wchar_t *Text, Point2D *someXY1, Point2D *someXY2)
 		{ JMP_STD(0x64DB50); }
 
+	void AddSelectable(TechnoClass* pTechno, int x, int y)
+		{ JMP_THIS(0x6D9EF0) };
+
 	/*
 	*   TacticalRenderMode_0_ALL = 0x0,
 	*	TacticalRenderMode_TERRAIN = 0x1,

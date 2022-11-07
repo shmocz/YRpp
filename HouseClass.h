@@ -130,14 +130,14 @@ public:
 
 	//Properties
 	DECLARE_PROPERTY(DynamicVectorClass<BaseNodeClass>, BaseNodes);
-	int                               PercentBuilt;
+	int PercentBuilt;
 	DECLARE_PROPERTY(DynamicVectorClass<CellStruct>, Cells_24);
 	DECLARE_PROPERTY(DynamicVectorClass<CellStruct>, Cells_38);
 	CellStruct Center;
 
-	PROTECTED_PROPERTY(BYTE,                    unknown_54[0x20]);
+	PROTECTED_PROPERTY(BYTE, unknown_54[0x20]);
 
-	HouseClass*                       Owner;
+	HouseClass* Owner;
 
 #pragma warning(suppress : 4265)
 };
@@ -744,29 +744,29 @@ public:
 	int                   InfantrySelfHeal;
 	int                   UnitsSelfHeal;
 	DECLARE_PROPERTY(DynamicVectorClass<StartingTechnoStruct*>, StartingUnits);
-	AIDifficulty          AIDifficulty; // be advised that it's reverse, Hard == 0 and Easy == 2. I'm sure Westwood has a good reason for this. Yep.
-	double                FirepowerMultiplier; // used
+	AIDifficulty          AIDifficulty;          // be advised that it's reverse, Hard == 0 and Easy == 2. I'm sure Westwood has a good reason for this. Yep.
+	double                FirepowerMultiplier;   // used
 	double                GroundspeedMultiplier; // unused ...
 	double                AirspeedMultiplier;
 	double                ArmorMultiplier;
 	double                ROFMultiplier;
 	double                CostMultiplier;
-	double                BuildTimeMultiplier; // ... unused ends
+	double                BuildTimeMultiplier;   // ... unused ends
 	double                RepairDelay;
 	double                BuildDelay;
 	int                   IQLevel;
 	int                   TechLevel;
-	IndexBitfield<HouseClass*> AltAllies; // ask question, receive brain damage
-	int                   StartingCredits;	//not sure how these are used // actual credits = this * 100
+	IndexBitfield<HouseClass*> AltAllies;        // ask question, receive brain damage
+	int                   StartingCredits;       // not sure how these are used // actual credits = this * 100
 	Edge                  StartingEdge;
 	DWORD                 AIState_1E4;
 	int                   SideIndex;
-	bool                  IsHumanPlayer;		// Is controlled by a human player.
-	bool                  IsInPlayerControl;	// Is controlled by current player.
-	bool                  Production;		    // AI production has begun.
+	bool                  IsHumanPlayer;         // Is controlled by a human player.
+	bool                  IsInPlayerControl;     // Is controlled by current player.
+	bool                  Production;            // AI production has begun.
 	bool                  AutocreateAllowed;
-	bool			      NodeLogic_1F0;
-	bool			      ShipYardConst_1F1;
+	bool                  NodeLogic_1F0;
+	bool                  ShipYardConst_1F1;
 	bool                  AITriggersActive;
 	bool                  AutoBaseBuilding;
 	bool                  DiscoveredByPlayer;
@@ -774,43 +774,43 @@ public:
 	bool                  IsGameOver;
 	bool                  IsWinner;
 	bool                  IsLoser;
-	bool                  CiviliansEvacuated; // used by the CivEvac triggers
+	bool                  CiviliansEvacuated;    // used by the CivEvac triggers
 	bool                  FirestormActive;
 	bool                  HasThreatNode;
 	bool                  RecheckTechTree;
-	int					  IPAddress;
-	int					  TournamentTeamID;
-	bool				  LostConnection;
+	int                   IPAddress;
+	int                   TournamentTeamID;
+	bool                  LostConnection;
 	int                   SelectedPathIndex;
-	WaypointPathClass* PlanningPaths [12]; // 12 paths for "planning mode"
-	char                  Visionary;			//??? exe says so
+	WaypointPathClass*    PlanningPaths [12];    // 12 paths for "planning mode"
+	char                  Visionary;             //??? exe says so
 	bool                  MapIsClear;
 	bool                  IsTiberiumShort;
 	bool                  HasBeenSpied;
-	bool                  HasBeenThieved; // Something of this house has been entered by a Thief/VehicleThief
-	bool                  Repairing; // BuildingClass::Repair, handholder for hurr durf AI
+	bool                  HasBeenThieved;        // Something of this house has been entered by a Thief/VehicleThief
+	bool                  Repairing;             // BuildingClass::Repair, handholder for hurr durf AI
 	bool                  IsBuiltSomething;
 	bool                  IsResigner;
 	bool                  IsGiverUpper;
 	bool                  AllToHunt;
 	bool                  IsParanoid;
 	bool                  IsToLook;
-	int                   IQLevel2;			//no idea why we got this twice
+	int                   IQLevel2;              // no idea why we got this twice
 	AIMode                AIMode;
 	DECLARE_PROPERTY(DynamicVectorClass<SuperClass*>, Supers);
 	int                   LastBuiltBuildingType;
 	int                   LastBuiltInfantryType;
 	int                   LastBuiltAircraftType;
 	int                   LastBuiltVehicleType;
-	int                   AllowWinBlocks; // some ra1 residue map trigger-fu, should die a painful death
+	int                   AllowWinBlocks;        // some ra1 residue map trigger-fu, should die a painful death
 	DECLARE_PROPERTY(CDTimerClass, RepairTimer); // for AI
 	DECLARE_PROPERTY(CDTimerClass, AlertTimer);
 	DECLARE_PROPERTY(CDTimerClass, BorrowedTime);
 	DECLARE_PROPERTY(CDTimerClass, PowerBlackoutTimer);
 	DECLARE_PROPERTY(CDTimerClass, RadarBlackoutTimer);
-	bool                  Side2TechInfiltrated; // asswards! whether this player has infiltrated stuff
-	bool                  Side1TechInfiltrated; // which is listed in [AI]->BuildTech
-	bool                  Side0TechInfiltrated; // and has the appropriate AIBasePlanningSide
+	bool                  Side2TechInfiltrated;  // asswards! whether this player has infiltrated stuff
+	bool                  Side1TechInfiltrated;  // which is listed in [AI]->BuildTech
+	bool                  Side0TechInfiltrated;  // and has the appropriate AIBasePlanningSide
 	bool                  BarracksInfiltrated;
 	bool                  WarFactoryInfiltrated;
 
@@ -824,7 +824,7 @@ public:
 			|| (item->WhatAmI == abs_BuildingType && (item->RequiredHouses & this->BuildingAltOwner))
 		)
 			{ can build }
-		 */
+		*/
 	DWORD InfantryAltOwner;
 	DWORD UnitAltOwner;
 	DWORD AircraftAltOwner;
@@ -832,9 +832,9 @@ public:
 
 	int                   AirportDocks;
 	int                   PoweredUnitCenters;
-	int					  CreditsSpent;
-	int					  HarvestedCredits;
-	int					  StolenBuildingsCredits;
+	int                   CreditsSpent;
+	int                   HarvestedCredits;
+	int                   StolenBuildingsCredits;
 	int                   OwnedUnits;
 	int                   OwnedNavy;
 	int                   OwnedBuildings;
@@ -854,7 +854,7 @@ public:
 	DECLARE_PROPERTY(UnitTrackerClass, KilledUnitTypes);
 	DECLARE_PROPERTY(UnitTrackerClass, KilledBuildingTypes);
 	DECLARE_PROPERTY(UnitTrackerClass, CapturedBuildings);
-	DECLARE_PROPERTY(UnitTrackerClass, CollectedCrates);	//YES, THIS IS HOW WW WASTES TONS OF RAM
+	DECLARE_PROPERTY(UnitTrackerClass, CollectedCrates); // YES, THIS IS HOW WW WASTES TONS OF RAM
 	int                   NumAirpads;
 	int                   NumBarracks;
 	int                   NumWarFactories;
@@ -877,41 +877,41 @@ public:
 	FactoryClass*         Primary_Unused2;
 	FactoryClass*         Primary_Unused3;
 	FactoryClass*         Primary_ForDefenses;
-	BYTE				  AircraftType_53D0;
-	BYTE				  InfantryType_53D1;
-	BYTE				  VehicleType_53D2;
-	BYTE				  ShipType_53D3;
-	BYTE				  BuildingType_53D4;
-	BYTE				  unknown_53D5;
-	BYTE				  unknown_53D6;
-	BYTE				  unknown_53D7;
-	BYTE				  DefenseType_53D8;
-	BYTE				  unknown_53D9;
-	BYTE				  unknown_53DA;
-	BYTE				  unknown_53DB;
-	UnitClass*			  OurFlagCarrier;
-	CellStruct			  OurFlagCoords;
+	BYTE                  AircraftType_53D0;
+	BYTE                  InfantryType_53D1;
+	BYTE                  VehicleType_53D2;
+	BYTE                  ShipType_53D3;
+	BYTE                  BuildingType_53D4;
+	BYTE                  unknown_53D5;
+	BYTE                  unknown_53D6;
+	BYTE                  unknown_53D7;
+	BYTE                  DefenseType_53D8;
+	BYTE                  unknown_53D9;
+	BYTE                  unknown_53DA;
+	BYTE                  unknown_53DB;
+	UnitClass*            OurFlagCarrier;
+	CellStruct            OurFlagCoords;
 	//for endgame score screen
-	int					  KilledUnitsOfHouses [20];		// 20 Houses only!
+	int                   KilledUnitsOfHouses [20];     // 20 Houses only!
 	int                   TotalKilledUnits;
-	int					  KilledBuildingsOfHouses [20];	// 20 Houses only!
+	int                   KilledBuildingsOfHouses [20]; // 20 Houses only!
 	int                   TotalKilledBuildings;
 	int                   WhoLastHurtMe;
 	CellStruct            BaseSpawnCell;
 	CellStruct            BaseCenter; // set by map action 137 and 138
-	int					  Radius;
+	int                   Radius;
 	DECLARE_PROPERTY_ARRAY(ZoneInfoStruct, ZoneInfos, 5);
-	int					  LATime;
-	int					  LAEnemy;
-	int					  ToCapture;
+	int                   LATime;
+	int                   LAEnemy;
+	int                   ToCapture;
 //	IndexBitfield<HouseTypeClass *> RadarVisibleTo; // these house types(!?!, fuck you WW) can see my radar
-	IndexBitfield<HouseClass *> RadarVisibleTo; // this crap is being rewritten to use house indices instead of house types
+	IndexBitfield<HouseClass *> RadarVisibleTo;  // this crap is being rewritten to use house indices instead of house types
 	int                   SiloMoney;
-	TargetType			  PreferredTargetType; // Set via map action 35. The preferred object type to attack.
-	CellStruct			  PreferredTargetCell; // Set via map action 135 and 136. Used to override firing location of targettable SWs.
-	CellStruct			  PreferredDefensiveCell; // Set via map action 140 and 141, or when an AIDefendAgainst SW is launched.
-	CellStruct			  PreferredDefensiveCell2; // No known function sets this to a real value, but it would take precedence over the other.
-	int					  PreferredDefensiveCellStartTime; // The frame the PreferredDefensiveCell was set. Used to fire the Force Shield.
+	TargetType            PreferredTargetType; // Set via map action 35. The preferred object type to attack.
+	CellStruct            PreferredTargetCell; // Set via map action 135 and 136. Used to override firing location of targettable SWs.
+	CellStruct            PreferredDefensiveCell; // Set via map action 140 and 141, or when an AIDefendAgainst SW is launched.
+	CellStruct            PreferredDefensiveCell2; // No known function sets this to a real value, but it would take precedence over the other.
+	int                   PreferredDefensiveCellStartTime; // The frame the PreferredDefensiveCell was set. Used to fire the Force Shield.
 
 		// Used for: Counting objects ever owned
 		// altered on each object's loss or gain
@@ -958,19 +958,19 @@ public:
 	int                   BaseDefenseTeamCount;
 	DECLARE_PROPERTY_ARRAY(DropshipStruct, DropshipData, 3);
 	int                   CurrentDropshipIndex;
-	byte				  HasCloakingRanges; // don't ask
-	ColorStruct			  Color;
-	ColorStruct			  LaserColor; // my idb says so
-	BaseClass			  Base;
+	byte                  HasCloakingRanges; // don't ask
+	ColorStruct           Color;
+	ColorStruct           LaserColor; // my idb says so
+	BaseClass             Base;
 	bool                  RecheckPower;
 	bool                  RecheckRadar;
 	bool                  SpySatActive;
 	bool                  IsBeingDrained;
 	Edge                  Edge;
-	CellStruct			  EMPTarget;
-	CellStruct			  NukeTarget;
-	IndexBitfield<HouseClass*> Allies;	//flags, one bit per HouseClass instance
-	                                        	//-> 32 players possible here
+	CellStruct            EMPTarget;
+	CellStruct            NukeTarget;
+	IndexBitfield<HouseClass*> Allies; // flags, one bit per HouseClass instance
+	                                   //-> 32 players possible here
 	DECLARE_PROPERTY(CDTimerClass, DamageDelayTimer);
 	DECLARE_PROPERTY(CDTimerClass, TeamDelayTimer); // for AI attacks
 	DECLARE_PROPERTY(CDTimerClass, TriggerDelayTimer);
@@ -978,15 +978,15 @@ public:
 	DECLARE_PROPERTY(CDTimerClass, SpeakPowerDelayTimer);
 	DECLARE_PROPERTY(CDTimerClass, SpeakMoneyDelayTimer);
 	DECLARE_PROPERTY(CDTimerClass, SpeakMaxedDelayTimer);
-	IAIHouse*		      AIGeneral;
+	IAIHouse*             AIGeneral;
 
 	unsigned int          ThreatPosedEstimates[130][130]; // BLARGH
 
-	char				  PlainName[21]; // this defaults to the owner country's name in SP or <human player><computer player> in MP. Used as owner for preplaced map objects
-	char				  UINameString[33]; // this contains the UIName= text from the INI! or
-	wchar_t				  UIName [21]; // this contains the CSF string from UIName= above, or a copy of the country's UIName if not defined. Take note that this is shorter than the country's UIName can be...
+	char                  PlainName[21];    // this defaults to the owner country's name in SP or <human player><computer player> in MP. Used as owner for preplaced map objects
+	char                  UINameString[33]; // this contains the UIName= text from the INI! or
+	wchar_t               UIName [21];      // this contains the CSF string from UIName= above, or a copy of the country's UIName if not defined. Take note that this is shorter than the country's UIName can be...
 	int                   ColorSchemeIndex;
-	CellStruct			  StartingCell;
+	CellStruct            StartingCell;
 	IndexBitfield<HouseClass*> StartingAllies;
 	DWORD                 unknown_16060;
 	DECLARE_PROPERTY(DynamicVectorClass<IConnectionPoint*>, WaypointPath);

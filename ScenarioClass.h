@@ -90,6 +90,15 @@ public:
 	static bool __fastcall SaveGame(const char* FileName, const wchar_t* Description, bool BarGraph = false)
 		{ JMP_STD(0x67CEF0); }
 
+	static bool __fastcall LoadGame(const char* FileName)
+		{ JMP_STD(0x67E440); }
+
+	static bool __fastcall StartScenario(const char* FileName, bool Briefing, int CampaignIndex)
+		{ JMP_STD(0x683AB0); }
+
+	static void __fastcall AssignHouses()
+		{ JMP_STD(0x687F10); }
+
 	void ReadStartPoints(INIClass& ini)
 		{ JMP_THIS(0x689D30); }
 

@@ -29,6 +29,8 @@ struct PlayerData {
 
 #pragma pack(push, 1)
 struct NodeNameType {
+	static constexpr constant_ptr<DynamicVectorClass<NodeNameType*>,0xA8DA74> const Array{};
+
 	wchar_t Name[20];
 	PlayerData Data;
 	char Serial[23];

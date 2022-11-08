@@ -77,12 +77,24 @@ public:
 		return (this->data & (1u << obj->ArrayIndex)) != 0u;
 	}
 
+	bool Contains(int index) const {
+		return (this->data & (1u << index)) != 0u;
+	}
+
 	void Add(const T obj) {
 		this->data |= (1u << obj->ArrayIndex);
 	}
 
+	void Add(int index) {
+		this->data |= (1u << index);
+	}
+
 	void Remove(const T obj) {
 		this->data &= ~(1u << obj->ArrayIndex);
+	}
+
+	void Remove(int index) {
+		this->data &= ~(1u << index);
 	}
 
 	void Clear() {

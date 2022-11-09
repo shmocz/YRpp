@@ -35,6 +35,33 @@ public:
 	static constexpr reference<bool, 0xA8E9A0u> const IsActive{};
 	static constexpr reference<bool, 0xA8ED80u> const IsFocused{};
 	static constexpr reference<int, 0xA8EDA0u> const SpecialDialog{};
+	static constexpr reference<bool, 0xAC48D4> const PCXInitialized{};
+
+	static constexpr reference<int, 0xA8ED94u> const Seed{};
+	static constexpr reference<int, 0x822CF4u> const TechLevel{};
+	static constexpr reference<int, 0xA8B54Cu> const PlayerCount{};
+	static constexpr reference<int, 0xA8B394u> const PlayerColor{};
+	static constexpr reference<bool, 0xAC10C8u> const ObserverMode{};
+	static constexpr reference<char, 0xA8B8E0u> const ScenarioName{};
+
+	static struct Network
+	{
+	public:
+		static constexpr reference<int, 0xB779C4u> const Tournament{};
+		static constexpr reference<DWORD, 0xB779D4u> const WOLGameID{};
+		static constexpr reference<time_t, 0xB77788u> const PlanetWestwoodStartTime{};
+		static constexpr reference<int, 0xB73814u> const GameStockKeepingUnit{};
+		static constexpr reference<int, 0xA8B24Cu> const ProtocolVersion{};
+		static constexpr reference<int, 0xA8B554u> const FrameSendRate{};
+		static constexpr reference<int, 0x83737Cu> const ReconnectTimeout{};
+		static constexpr reference<int, 0xA8B550u> const MaxAhead{};
+		static constexpr reference<int, 0xA8B568u> const MaxMaxAhead{};
+		static constexpr reference<int, 0xA8DB9Cu> const LatencyFudge{};
+		static constexpr reference<int, 0xA8B558u> const RequestedFPS{};
+
+		static bool Init()
+			{ JMP_STD(0x5DA6C0); }
+	} Network;
 
 	// the game's own rounding function
 	// infamous for true'ing (F2I(-5.00) == -4.00)
@@ -100,6 +127,21 @@ public:
 
 	static LARGE_INTEGER __fastcall AudioGetTime()
 		{ JMP_STD(0x4093B0); }
+
+	static void InitRandom()
+		{ JMP_STD(0x52FC20); }
+
+	static void InitUIStuff()
+	{
+		CALL(0x600560); // InitCommonDialogStuff()
+
+		if (PCXInitialized)
+			return;
+
+		PCXInitialized = true;
+		CALL(0x61F190); // InitUIColorShifts()
+		CALL(0x61F210); // LoadPCXFiles()
+	}
 };
 
 // this fake class contains the IIDs used by the game

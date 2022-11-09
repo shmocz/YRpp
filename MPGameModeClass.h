@@ -60,6 +60,14 @@ public:
 	//global arrays
 	static DynamicVectorClass<MPGameModeClass*>* GameModes;
 
+	static bool Set(int index)
+	{
+		THISCALL_EX(index, 0x5D5F30);
+		MEM_WRITEIMM32(0xA8B23C, eax);
+		VAR8_REG(bool, success, al);
+		return success;
+	}
+
 	/*
 	static UNINIT_FUNC(0x5D7FD0);
 	static INIT_FUNC(0);

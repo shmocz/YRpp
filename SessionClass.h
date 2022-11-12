@@ -1,9 +1,10 @@
 #pragma once
 
-#include <GeneralDefinitions.h>
-#include <MPGameModeClass.h>
+#include <ArrayClasses.h>
 #include <GameModeOptionsClass.h>
+#include <GeneralDefinitions.h>
 #include <IPX.h>
+#include <MPGameModeClass.h>
 #include <WinSock.h>
 
 #include <Helpers/CompileTime.h>
@@ -61,11 +62,29 @@ public:
 		return Instance->GameMode == GameMode::Campaign;
 	}
 
+	static bool IsSkirmish()
+	{
+		return Instance->GameMode == GameMode::Skirmish;
+	}
+
 	static bool IsSingleplayer()
 	{
 		return Instance->GameMode == GameMode::Campaign
 			|| Instance->GameMode == GameMode::Skirmish;
 	}
+
+	static bool IsMultiplayer()
+	{
+		return Instance->GameMode == GameMode::LAN
+			|| Instance->GameMode == GameMode::Internet;
+	}
+
+	// non-virtual
+	void ReadScenarioDescriptions()
+		{ JMP_THIS(0x699980) }
+
+	bool CreateConnections()
+		{ JMP_THIS(0x697B70) }
 
 	GameMode GameMode;
 	MPGameModeClass* MPGameMode;

@@ -1,11 +1,13 @@
 #pragma once
 
+#include <ASMMacros.h>
 #include <Helpers/CompileTime.h>
 
 class GameOptionsClass
 {
 public:
 	static constexpr reference<GameOptionsClass, 0xA8EB60u> const Instance{};
+	static constexpr reference<bool, 0x89F978u> const WindowedMode{};
 
 	int GetAnimSpeed(int rate)
 		{ JMP_THIS(0x5FB2E0); }

@@ -8,11 +8,11 @@
 #include <ArrayClasses.h>
 #include <Surface.h>
 
-#include <Blitters.h>
-
 #include <FileFormats/SHP.h>
 #include <Helpers/CompileTime.h>
 
+class Blitter;
+class RLEBlitter;
 class RGBClass;
 struct ColorStruct;
 class DSurface;
@@ -31,17 +31,17 @@ public:
 		{ JMP_STD(0x72ADE0); }
 
 	// if you're drawing a SHP, call SHPStruct::HasCompression and choose one of these two based on that
-	BlitterCore* SelectPlainBlitter(BlitterFlags flags) const
+	Blitter* SelectPlainBlitter(BlitterFlags flags) const
 		{ JMP_THIS(0x490B90); }
 
-	RLEBlitterCore* SelectRLEBlitter(BlitterFlags flags) const
+	RLEBlitter* SelectRLEBlitter(BlitterFlags flags) const
 		{ JMP_THIS(0x490E50); }
 
 	virtual ~ConvertClass() RX;
 
 	ConvertClass(
 		BytePalette const& palette,
-		BytePalette const& palette2, //???
+		BytePalette const& eightbitpalette, //???
 		DSurface* pSurface,
 		size_t shadeCount,
 		bool skipBlitters) : ConvertClass(noinit_t())
@@ -56,22 +56,16 @@ protected:
 	//===========================================================================
 
 public:
-
-	//That's right, I don't know anything about this class, except what it's used for...
-
-	// == 1 ? alloc_a_few_blitters_for_uchar : alloc_a_fuckton_of_blitters_for_ushort
-	// actually this is just the result of pSurface->GetBytesPerPixel()
-	// but this name sounds better
 	int BytesPerPixel;
-	BlitterCore* Blitters[50];
-	RLEBlitterCore* RLEBlitters[39];
+	Blitter* Blitters[50];
+	RLEBlitter* RLEBlitters[39];
 	int ShadeCount;
-	void* BufferA; // new(ShadeCount * 8 * BytesPerPixel) - gets filled with palette values on CTOR
-	void* Midpoint; // points to the middle of BufferA above, ??
-	void* BufferB; // if(BytesPerPixel == 1) { BufferB = new byte[0x100]; }
+	void* FullColorData; // new(ShadeCount* 8* BytesPerPixel) - gets filled with palette values on CTOR
+	void* PaletteData; // points to the middle of FullColorData above
+	void* ByteColorData; // if(BytesPerPixel == 1) { ByteColorData = new byte[0x100]; }
 	DWORD CurrentZRemap; // set right before drawing
-	DWORD HalfColorMask; // for masking colors right-shifted by 1
-	DWORD QuarterColorMask; // for masking colors right-shifted by 2
+	DWORD HalfTranslucencyMask; // Used by 50 alpha blending
+	DWORD QuatTranslucencyMask; // Used by 25 and 75 alpha blending
 };
 
 class LightConvertClass : public ConvertClass

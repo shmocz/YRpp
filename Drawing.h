@@ -228,11 +228,17 @@ public:
 	void BlitRect(RectangleStruct Rect) { JMP_THIS(0x411330); }
 	void* GetBuffer(int X, int Y) { JMP_THIS(0x4114B0); }
 
+	void AdjustPointer(void* ptr)
+	{
+		if (ptr >= BufferTail)
+			reinterpret_cast<char*&>(ptr) -= BufferSize;
+	}
+
 	RectangleStruct Bounds;
 	int BufferPosition;
 	BSurface* Surface;
-	int BufferHead;
-	int BufferTail;
+	void* BufferHead;
+	void* BufferTail;
 	int BufferSize;
 	int MaxValue;
 	int Width;
@@ -254,11 +260,17 @@ public:
 	void BlitRect(RectangleStruct Rect) { JMP_THIS(0x7BCFB0); }
 	void* GetBuffer(int X, int Y) { JMP_THIS(0x7BD130); }
 
+	void AdjustPointer(void* ptr)
+	{
+		if (ptr >= BufferTail)
+			reinterpret_cast<char*&>(ptr) -= BufferSize;
+	}
+
 	RectangleStruct Bounds;
 	int BufferOffset;
 	BSurface* Surface;
-	int BufferHead;
-	int BufferTail;
+	void* BufferHead;
+	void* BufferTail;
 	int BufferSize;
 	int MaxValue;
 	int Width;

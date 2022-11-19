@@ -2,16 +2,16 @@
 
 #include "Blitter.h"
 
-DEFINE_RLE_BLITTER(RLEBlitTransLucent75ZRead)
+DEFINE_RLE_BLITTER(RLEBlitTransLucent75ZReadWarp)
 {
 public:
-	inline explicit RLEBlitTransLucent75ZRead(T* data, WORD mask) noexcept
+	inline explicit RLEBlitTransLucent75ZReadWarp(T* data, WORD mask) noexcept
 	{
 		PaletteData = data;
 		Mask = mask;
 	}
 
-	virtual ~RLEBlitTransLucent75ZRead() override final = default;
+	virtual ~RLEBlitTransLucent75ZReadWarp() override final = default;
 
 	virtual void Blit_Copy(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust)
 	{

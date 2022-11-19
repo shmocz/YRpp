@@ -5,6 +5,8 @@
 #include <Drawing.h>
 #include <AlphaLightingRemapClass.h>
 
+// All of those blitters can be found at 48EBF0!
+
 // All Westwood fucking jesus blitters goes here!
 class Blitter
 {

@@ -2,16 +2,16 @@
 
 #include "Blitter.h"
 
-DEFINE_RLE_BLITTER(RLEBlitTransRemapDestZReadWrite)
+DEFINE_RLE_BLITTER(RLEBlitTransRemapXlatZReadWrite)
 {
 public:
-	inline explicit RLEBlitTransRemapDestZReadWrite(T* remap, T* palette) noexcept
+	inline explicit RLEBlitTransRemapXlatZReadWrite(T* remap, T* palette) noexcept
 	{
 		RemapData = remap;
 		PaletteData = palette;
 	}
 
-	virtual ~RLEBlitTransRemapDestZReadWrite() override final = default;
+	virtual ~RLEBlitTransRemapXlatZReadWrite() override final = default;
 
 	virtual void Blit_Copy(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust)
 	{

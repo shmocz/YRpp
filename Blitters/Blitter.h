@@ -19,7 +19,7 @@ protected:
 	inline static WORD* Lookup_Alpha_Remapper(int alvl, AlphaLightingRemapClass* remapper)
 	{
 		// convert alvl from [0, 2000] into [0, 254]
-		int level = std::min(254, 261 * std::max(0, alvl) >> 11);
+		int level = std::min(254, 261* std::max(0, alvl) >> 11);
 		return remapper->Table[level];
 	}
 };
@@ -36,7 +36,7 @@ protected:
 	inline static WORD* Lookup_Alpha_Remapper(int alvl, AlphaLightingRemapClass* remapper)
 	{
 		// convert alvl from [0, 2000] into [0, 254]
-		int level = std::min(254, 261 * std::max(0, alvl) >> 11);
+		int level = std::min(254, 261* std::max(0, alvl) >> 11);
 		return remapper->Table[level];
 	}
 
@@ -71,8 +71,8 @@ protected:
 		}
 	}
 
-	template<bool UseZBuffer, bool UseABuffer, bool UseZAdjust, typename T, typename Fn>
-	inline static void Process_Pixel_Datas(T* dest, byte* src, int len, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust, Fn f)
+	template<bool UseZBuffer, bool UseABuffer, typename T, typename Fn>
+	inline static void Process_Pixel_Datas(T* dest, byte* src, int len, int zbase, WORD* zbuf, WORD* abuf, byte* zadjust, Fn f)
 	{
 		if (len < 0)
 			return;
@@ -82,101 +82,14 @@ protected:
 			if (byte srcv = *src++)
 			{
 				if constexpr (UseZBuffer && UseABuffer)
-				{
-					if constexpr (UseZAdjust)
-						f(*dest, srcv, zbase, *zbuf++, *abuf++, alvl, warp, *zadjust++);
-					else
-						f(*dest, srcv, zbase, *zbuf++, *abuf++, alvl, warp);
-				}
+					f(*dest, srcv, zbase, *zbuf++, *zadjust++, *abuf++);
 				else if constexpr (UseZBuffer && !UseABuffer)
-				{
-					if constexpr (UseZAdjust)
-						f(*dest, srcv, zbase, *zbuf++, *zadjust++);
-					else
-						f(*dest, srcv, zbase, *zbuf++);
-				}
+					f(*dest, srcv, zbase, *zbuf++, *zadjust++);
 				else if constexpr (!UseZBuffer && UseABuffer)
-					f(*dest, srcv, *abuf++, alvl, warp);
+					f(*dest, srcv, *abuf++);
 				else // !UseZBuffer && !UseABuffer
 					f(*dest, srcv);
 
-				++dest;
-				--len;
-			}
-			else
-			{
-				byte off = *src++;
-				len -= off;
-				dest += off;
-
-				if constexpr (UseZBuffer)
-				{
-					zbuf += off;
-					zadjust += off;
-				}
-				if constexpr (UseABuffer)
-					abuf += off;
-			}
-
-			if constexpr (UseZBuffer)
-				ZBuffer::Instance->AdjustPointer(zbuf);
-			if constexpr (UseABuffer)
-				ABuffer::Instance->AdjustPointer(abuf);
-		}
-	}
-
-	template<bool UseZBuffer, bool UseABuffer, bool UseZAdjust, bool UseTint, typename T, typename Fn>
-	inline static void Process_Pixel_Datas_Tinted(T* dest, byte* src, int len, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust, WORD tint, Fn f)
-	{
-		if (len < 0)
-			return;
-
-		while (len > 0)
-		{
-			if (byte srcv = *src++)
-			{
-				if constexpr (UseTint)
-				{
-					if constexpr (UseZBuffer && UseABuffer)
-					{
-						if constexpr (UseZAdjust)
-							f(*dest, srcv, zbase, *zbuf++, *zadjust++, *abuf++, alvl, warp);
-						else
-							f(*dest, srcv, zbase, *zbuf++, *abuf++, alvl, warp);
-					}
-					else if constexpr (UseZBuffer && !UseABuffer)
-					{
-						if constexpr (UseZAdjust)
-							f(*dest, srcv, zbase, *zbuf++, *zadjust++);
-						else
-							f(*dest, srcv, zbase, *zbuf++);
-					}
-					else if constexpr (!UseZBuffer && UseABuffer)
-						f(*dest, srcv, *abuf++, alvl, warp);
-					else // !UseZBuffer && !UseABuffer
-						f(*dest, srcv);
-				}
-				else
-				{
-					if constexpr (UseZBuffer && UseABuffer)
-					{
-						if constexpr (UseZAdjust)
-							f(*dest, srcv, zbase, *zbuf++, *zadjust++, *abuf++, alvl, warp, tint);
-						else
-							f(*dest, srcv, zbase, *zbuf++, *abuf++, alvl, warp, tint);
-					}
-					else if constexpr (UseZBuffer && !UseABuffer)
-					{
-						if constexpr (UseZAdjust)
-							f(*dest, srcv, zbase, *zbuf++, *zadjust++, tint);
-						else
-							f(*dest, srcv, zbase, *zbuf++, tint);
-					}
-					else if constexpr (!UseZBuffer && UseABuffer)
-						f(*dest, srcv, *abuf++, alvl, warp, tint);
-					else // !UseZBuffer && !UseABuffer
-						f(*dest, srcv, tint);
-				}
 				++dest;
 				--len;
 			}

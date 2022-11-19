@@ -26,7 +26,7 @@ public:
 				dest = PaletteData[*Remap[srcv]];
 		};
 
-		Process_Pixel_Datas<true, false, true>(dest, src, len, zbase, zbuf, abuf, alvl, warp, zadjust, handler);
+		Process_Pixel_Datas<true, false>(dest, src, len, zbase, zbuf, abuf, alvl, zadjust, handler);
 	}
 
 	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust, WORD tint)

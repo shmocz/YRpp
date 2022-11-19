@@ -11,9 +11,9 @@ class Blitter
 public:
 	virtual ~Blitter() = default;
 	virtual void Blit_Copy(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp) = 0;
-	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, int tint) = 0;
+	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, WORD tint) = 0;
 	virtual void Blit_Move(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp) = 0;
-	virtual void Blit_Move_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, int tint) = 0;
+	virtual void Blit_Move_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, WORD tint) = 0;
 
 protected:
 	inline static WORD* Lookup_Alpha_Remapper(int alvl, AlphaLightingRemapClass* remapper)
@@ -30,7 +30,7 @@ class RLEBlitter
 public:
 	virtual ~RLEBlitter() = default;
 	virtual void Blit_Copy(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust) = 0;
-	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust, int tint) = 0;
+	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust, WORD tint) = 0;
 
 protected:
 	inline static WORD* Lookup_Alpha_Remapper(int alvl, AlphaLightingRemapClass* remapper)
@@ -126,7 +126,7 @@ protected:
 	}
 
 	template<bool UseZBuffer, bool UseABuffer, bool UseZAdjust, bool UseTint, typename T, typename Fn>
-	inline static void Process_Pixel_Datas_Tinted(T* dest, byte* src, int len, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust, int tint, Fn f)
+	inline static void Process_Pixel_Datas_Tinted(T* dest, byte* src, int len, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust, WORD tint, Fn f)
 	{
 		if (len < 0)
 			return;

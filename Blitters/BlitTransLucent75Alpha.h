@@ -33,7 +33,7 @@ public:
 		}
 	}
 
-	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, int tint)
+	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, WORD tint)
 	{
 		Blit_Copy(dst, src, len, zval, zbuf, abuf, alvl, 0);
 	}
@@ -43,7 +43,7 @@ public:
 		Blit_Copy(dst, src, len, zval, zbuf, abuf, alvl, 0);
 	}
 
-	virtual void Blit_Move_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, int tint)
+	virtual void Blit_Move_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, WORD tint)
 	{
 		Blit_Copy(dst, src, len, zval, zbuf, abuf, alvl, 0);
 	}

@@ -31,7 +31,7 @@ public:
 		Process_Pixel_Datas<true, false, true>(dest, src, len, zbase, zbuf, abuf, alvl, alpha_idx, zadjust, handler);
 	}
 
-	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust, int tint)
+	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust, WORD tint)
 	{
 		Blit_Copy(dst, src, len, line, zbase, zbuf, abuf, alvl, alpha_idx, zadjust);
 	}

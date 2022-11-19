@@ -2,16 +2,17 @@
 
 #include "Blitter.h"
 
-DEFINE_BLITTER(BlitTransZRemapXlatZReadWrite)
+DEFINE_BLITTER(BlitTransLucent75AlphaZReadWrite)
 {
 public:
-	inline explicit BlitTransZRemapXlatZReadWrite(byte* remap, T* data) noexcept
+	inline explicit BlitTransLucent75AlphaZReadWrite(T* data, WORD mask, int shadecount) noexcept
 	{
-		Remap = &remap;
 		PaletteData = data;
+		Mask = mask;
+		AlphaRemapper = AlphaLightingRemapClass::FindOrAllocate(shadecount);
 	}
 
-	virtual ~BlitTransZRemapXlatZReadWrite() override final = default;
+	virtual ~BlitTransLucent75AlphaZReadWrite() override final = default;
 
 	virtual void Blit_Copy(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp) override final
 	{
@@ -19,6 +20,7 @@ public:
 			return;
 
 		auto dest = reinterpret_cast<T*>(dst);
+		auto adata = Lookup_Alpha_Remapper(alvl, AlphaRemapper);
 
 		while (len--)
 		{
@@ -27,14 +29,16 @@ public:
 			{
 				if (byte idx = *src++)
 				{
-					*dest = PaletteData[idx];
+					*dest = 3 * (Mask & (*dest >> 2)) + (Mask & (PaletteData[idx | adata[*abuf]] >> 2));
 					zbufv = zval;
 				}
 			}
-			++src;
+
 			++dest;
+			++abuf;
 
 			ZBuffer::Instance->AdjustPointer(zbuf);
+			ABuffer::Instance->AdjustPointer(abuf);
 		}
 	}
 
@@ -54,6 +58,7 @@ public:
 	}
 
 private:
-	byte** Remap;
 	T* PaletteData;
+	WORD Mask;
+	AlphaLightingRemapClass* AlphaRemapper;
 };

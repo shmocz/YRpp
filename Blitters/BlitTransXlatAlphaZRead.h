@@ -2,16 +2,16 @@
 
 #include "Blitter.h"
 
-DEFINE_BLITTER(BlitTransXlatAlpha)
+DEFINE_BLITTER(BlitTransXlatAlphaZRead)
 {
 public:
-	inline explicit BlitTransXlatAlpha(T* data, int shadecount) noexcept
+	inline explicit BlitTransXlatAlphaZRead(T* data, int shadecount) noexcept
 	{
 		PaletteData = data;
 		AlphaRemapper = AlphaLightingRemapClass::FindOrAllocate(shadecount);
 	}
 
-	virtual ~BlitTransXlatAlpha() override final = default;
+	virtual ~BlitTransXlatAlphaZRead() override final = default;
 
 	virtual void Blit_Copy(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp) override final
 	{
@@ -23,18 +23,44 @@ public:
 
 		while (len--)
 		{
-			if (byte idx = *src++)
-				*dest = PaletteData[idx | adata[*abuf]];
+			WORD zbufv = *zbuf++;
+			if (zval < zbufv)
+			{
+				if (byte idx = *src++)
+					*dest = PaletteData[idx | adata[*abuf]];
+			}
+
 			++abuf;
 			++dest;
 
+			ZBuffer::Instance->AdjustPointer(zbuf);
 			ABuffer::Instance->AdjustPointer(abuf);
 		}
 	}
 
 	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, WORD tint)
 	{
-		Blit_Copy(dst, src, len, zval, zbuf, abuf, alvl, 0);
+		if (len < 0)
+			return;
+
+		auto dest = reinterpret_cast<T*>(dst);
+		auto adata = Lookup_Alpha_Remapper(alvl, AlphaRemapper);
+
+		while (len--)
+		{
+			WORD zbufv = *zbuf++;
+			if (zval < zbufv)
+			{
+				if (byte idx = *src++)
+					*dest = tint | PaletteData[idx | adata[*abuf]];
+			}
+
+			++abuf;
+			++dest;
+
+			ZBuffer::Instance->AdjustPointer(zbuf);
+			ABuffer::Instance->AdjustPointer(abuf);
+		}
 	}
 
 	virtual void Blit_Move(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp)
@@ -44,7 +70,7 @@ public:
 
 	virtual void Blit_Move_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, WORD tint)
 	{
-		Blit_Copy(dst, src, len, zval, zbuf, abuf, alvl, 0);
+		Blit_Copy_Tinted(dst, src, len, zval, zbuf, abuf, alvl, 0, tint);
 	}
 
 private:

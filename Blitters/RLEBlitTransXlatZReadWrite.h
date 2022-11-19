@@ -12,7 +12,7 @@ public:
 
 	virtual ~RLEBlitTransXlatZReadWrite() override final = default;
 
-	virtual void Blit_Copy(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust)
+	virtual void Blit_Copy(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust)
 	{
 		auto dest = reinterpret_cast<T*>(dst);
 
@@ -28,12 +28,12 @@ public:
 			}
 		};
 
-		Process_Pixel_Datas<true, false, true>(dest, src, len, zbase, zbuf, abuf, alvl, alpha_idx, zadjust, handler);
+		Process_Pixel_Datas<true, false, true>(dest, src, len, zbase, zbuf, abuf, alvl, warp, zadjust, handler);
 	}
 
-	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust, WORD tint)
+	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust, WORD tint)
 	{
-		Blit_Copy(dst, src, len, line, zbase, zbuf, abuf, alvl, alpha_idx, zadjust);
+		Blit_Copy(dst, src, len, line, zbase, zbuf, abuf, alvl, warp, zadjust);
 	}
 
 private:

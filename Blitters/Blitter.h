@@ -29,8 +29,8 @@ class RLEBlitter
 {
 public:
 	virtual ~RLEBlitter() = default;
-	virtual void Blit_Copy(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust) = 0;
-	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust, WORD tint) = 0;
+	virtual void Blit_Copy(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust) = 0;
+	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust, WORD tint) = 0;
 
 protected:
 	inline static WORD* Lookup_Alpha_Remapper(int alvl, AlphaLightingRemapClass* remapper)
@@ -72,7 +72,7 @@ protected:
 	}
 
 	template<bool UseZBuffer, bool UseABuffer, bool UseZAdjust, typename T, typename Fn>
-	inline static void Process_Pixel_Datas(T* dest, byte* src, int len, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust, Fn f)
+	inline static void Process_Pixel_Datas(T* dest, byte* src, int len, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust, Fn f)
 	{
 		if (len < 0)
 			return;
@@ -84,9 +84,9 @@ protected:
 				if constexpr (UseZBuffer && UseABuffer)
 				{
 					if constexpr (UseZAdjust)
-						f(*dest, srcv, zbase, *zbuf++, *abuf++, alvl, alpha_idx, *zadjust++);
+						f(*dest, srcv, zbase, *zbuf++, *abuf++, alvl, warp, *zadjust++);
 					else
-						f(*dest, srcv, zbase, *zbuf++, *abuf++, alvl, alpha_idx);
+						f(*dest, srcv, zbase, *zbuf++, *abuf++, alvl, warp);
 				}
 				else if constexpr (UseZBuffer && !UseABuffer)
 				{
@@ -96,7 +96,7 @@ protected:
 						f(*dest, srcv, zbase, *zbuf++);
 				}
 				else if constexpr (!UseZBuffer && UseABuffer)
-					f(*dest, srcv, *abuf++, alvl, alpha_idx);
+					f(*dest, srcv, *abuf++, alvl, warp);
 				else // !UseZBuffer && !UseABuffer
 					f(*dest, srcv);
 
@@ -126,7 +126,7 @@ protected:
 	}
 
 	template<bool UseZBuffer, bool UseABuffer, bool UseZAdjust, bool UseTint, typename T, typename Fn>
-	inline static void Process_Pixel_Datas_Tinted(T* dest, byte* src, int len, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust, WORD tint, Fn f)
+	inline static void Process_Pixel_Datas_Tinted(T* dest, byte* src, int len, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust, WORD tint, Fn f)
 	{
 		if (len < 0)
 			return;
@@ -140,9 +140,9 @@ protected:
 					if constexpr (UseZBuffer && UseABuffer)
 					{
 						if constexpr (UseZAdjust)
-							f(*dest, srcv, zbase, *zbuf++, *zadjust++, *abuf++, alvl, alpha_idx);
+							f(*dest, srcv, zbase, *zbuf++, *zadjust++, *abuf++, alvl, warp);
 						else
-							f(*dest, srcv, zbase, *zbuf++, *abuf++, alvl, alpha_idx);
+							f(*dest, srcv, zbase, *zbuf++, *abuf++, alvl, warp);
 					}
 					else if constexpr (UseZBuffer && !UseABuffer)
 					{
@@ -152,7 +152,7 @@ protected:
 							f(*dest, srcv, zbase, *zbuf++);
 					}
 					else if constexpr (!UseZBuffer && UseABuffer)
-						f(*dest, srcv, *abuf++, alvl, alpha_idx);
+						f(*dest, srcv, *abuf++, alvl, warp);
 					else // !UseZBuffer && !UseABuffer
 						f(*dest, srcv);
 				}
@@ -161,9 +161,9 @@ protected:
 					if constexpr (UseZBuffer && UseABuffer)
 					{
 						if constexpr (UseZAdjust)
-							f(*dest, srcv, zbase, *zbuf++, *zadjust++, *abuf++, alvl, alpha_idx, tint);
+							f(*dest, srcv, zbase, *zbuf++, *zadjust++, *abuf++, alvl, warp, tint);
 						else
-							f(*dest, srcv, zbase, *zbuf++, *abuf++, alvl, alpha_idx, tint);
+							f(*dest, srcv, zbase, *zbuf++, *abuf++, alvl, warp, tint);
 					}
 					else if constexpr (UseZBuffer && !UseABuffer)
 					{
@@ -173,7 +173,7 @@ protected:
 							f(*dest, srcv, zbase, *zbuf++, tint);
 					}
 					else if constexpr (!UseZBuffer && UseABuffer)
-						f(*dest, srcv, *abuf++, alvl, alpha_idx, tint);
+						f(*dest, srcv, *abuf++, alvl, warp, tint);
 					else // !UseZBuffer && !UseABuffer
 						f(*dest, srcv, tint);
 				}

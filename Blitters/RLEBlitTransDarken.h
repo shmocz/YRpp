@@ -2,15 +2,15 @@
 
 #include "Blitter.h"
 
-DEFINE_RLE_BLITTER(RLEBlitTransXlat)
+DEFINE_RLE_BLITTER(RLEBlitTransDarken)
 {
 public:
-	inline explicit RLEBlitTransXlat(T* data) noexcept
+	inline explicit RLEBlitTransDarken(WORD mask) noexcept
 	{
-		PaletteData = data;
+		Mask = mask;
 	}
 
-	virtual ~RLEBlitTransXlat() override final = default;
+	virtual ~RLEBlitTransDarken() override final = default;
 
 	virtual void Blit_Copy(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust)
 	{
@@ -20,7 +20,7 @@ public:
 
 		auto handler = [this](T& dest, byte srcv)
 		{
-			dest = PaletteData[srcv];
+			dest = Mask & (dest >> 1);
 		};
 
 		Process_Pixel_Datas<false, false, false>(dest, src, len, zbase, zbuf, abuf, alvl, warp, zadjust, handler);
@@ -32,5 +32,5 @@ public:
 	}
 
 private:
-	T* PaletteData;
+	WORD Mask;
 };

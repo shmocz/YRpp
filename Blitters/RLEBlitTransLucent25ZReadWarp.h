@@ -2,16 +2,16 @@
 
 #include "Blitter.h"
 
-DEFINE_RLE_BLITTER(RLEBlitTransXlatZRead)
+DEFINE_RLE_BLITTER(RLEBlitTransLucent25ZRead)
 {
 public:
-	inline explicit RLEBlitTransXlatZRead(byte* remap, T* data) noexcept
+	inline explicit RLEBlitTransLucent25ZRead(T* data, WORD mask) noexcept
 	{
-		Remap = &remap;
 		PaletteData = data;
+		Mask = mask;
 	}
 
-	virtual ~RLEBlitTransXlatZRead() override final = default;
+	virtual ~RLEBlitTransLucent25ZRead() override final = default;
 
 	virtual void Blit_Copy(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust)
 	{
@@ -23,7 +23,7 @@ public:
 		{
 			int zval = zbase - zadjustv;
 			if (zval < zbufv)
-				dest = PaletteData[*Remap[srcv]];
+				dest = (Mask & ((&dest)[warp] >> 2)) + 3 * (Mask & (PaletteData[srcv] >> 2));
 		};
 
 		Process_Pixel_Datas<true, false, true>(dest, src, len, zbase, zbuf, abuf, alvl, warp, zadjust, handler);
@@ -35,6 +35,6 @@ public:
 	}
 
 private:
-	byte** Remap;
 	T* PaletteData;
+	WORD Mask;
 };

@@ -3,6 +3,7 @@
 #include <YRPPCore.h>
 
 #include <Drawing.h>
+#include <AlphaLightingRemapClass.h>
 
 // All Westwood fucking jesus blitters goes here!
 class Blitter
@@ -13,6 +14,14 @@ public:
 	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, int tint) = 0;
 	virtual void Blit_Move(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp) = 0;
 	virtual void Blit_Move_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, int tint) = 0;
+
+protected:
+	inline static WORD* Lookup_Alpha_Remapper(int alvl, AlphaLightingRemapClass* remapper)
+	{
+		// convert alvl from [0, 2000] into [0, 254]
+		int level = std::min(254, 261 * std::max(0, alvl) >> 11);
+		return remapper->Table[level];
+	}
 };
 
 // And those are compressed one :(
@@ -24,6 +33,13 @@ public:
 	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int alpha_idx, byte* zadjust, int tint) = 0;
 
 protected:
+	inline static WORD* Lookup_Alpha_Remapper(int alvl, AlphaLightingRemapClass* remapper)
+	{
+		// convert alvl from [0, 2000] into [0, 254]
+		int level = std::min(254, 261 * std::max(0, alvl) >> 11);
+		return remapper->Table[level];
+	}
+
 	template<bool UseZBuffer, bool UseABuffer, typename T>
 	inline static void Process_Pre_Lines(T*& dest, byte*& src, int& len, const int& line, WORD* zbuf, WORD* abuf)
 	{

@@ -30,6 +30,8 @@ public:
 			}
 			++src;
 			++dest;
+
+			ZBuffer::Instance->AdjustPointer(zbuf);
 		}
 	}
 

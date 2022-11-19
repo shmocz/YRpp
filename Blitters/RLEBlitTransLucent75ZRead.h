@@ -26,7 +26,7 @@ public:
 				dest = 3 * (Mask & (dest >> 2)) + (Mask & (PaletteData[srcv] >> 2));
 		};
 
-		Process_Pixel_Datas<true, false>(dest, src, len, zbase, zbuf, abuf, alvl, zadjust, handler);
+		Process_Pixel_Datas<true, false>(dest, src, len, zbase, zbuf, abuf, zadjust, handler);
 	}
 
 	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int line, int zbase, WORD* zbuf, WORD* abuf, int alvl, int warp, byte* zadjust, WORD tint)

@@ -27,12 +27,22 @@ public:
 	unsigned char Green;
 	unsigned char Blue;
 
-	RGBClass()
+	explicit RGBClass() noexcept
+		: Red { 0 }
+		, Green { 0 }
+		, Blue { 0 }
 	{
-		Red = Green = Blue = 0;
 	}
 
-	RGBClass(int rgb, bool wordcolor = false)
+	explicit RGBClass(int r, int g, int b) noexcept
+		: Red { static_cast<unsigned char>(r) }
+		, Green { static_cast<unsigned char>(g) }
+		, Blue { static_cast<unsigned char>(b) }
+	{
+	}
+
+
+	explicit RGBClass(int rgb, bool wordcolor = false) noexcept
 	{
 		if (!wordcolor)
 		{

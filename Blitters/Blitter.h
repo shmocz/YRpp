@@ -9,10 +9,10 @@ class Blitter
 {
 public:
 	virtual ~Blitter() = default;
-	virtual void Blit_Copy(void* dst, byte* src, int len, int zmin, WORD* zbuf, WORD* abuf, int alvl, int warp) = 0;
-	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int zmin, WORD* zbuf, WORD* abuf, int alvl, int warp, int tint) = 0;
-	virtual void Blit_Move(void* dst, byte* src, int len, int zmin, WORD* zbuf, WORD* abuf, int alvl, int warp) = 0;
-	virtual void Blit_Move_Tinted(void* dst, byte* src, int len, int zmin, WORD* zbuf, WORD* abuf, int alvl, int warp, int tint) = 0;
+	virtual void Blit_Copy(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp) = 0;
+	virtual void Blit_Copy_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, int tint) = 0;
+	virtual void Blit_Move(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp) = 0;
+	virtual void Blit_Move_Tinted(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp, int tint) = 0;
 };
 
 // And those are compressed one :(

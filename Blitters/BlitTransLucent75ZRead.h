@@ -2,15 +2,16 @@
 
 #include "Blitter.h"
 
-DEFINE_BLITTER(BlitTransRemapDest)
+DEFINE_BLITTER(BlitTransLucent75ZRead)
 {
 public:
-	inline explicit BlitTransRemapDest(T* data) noexcept
+	inline explicit BlitTransLucent75ZRead(T* data, WORD mask) noexcept
 	{
-		RemapDest = data;
+		PaletteData = data;
+		Mask = mask;
 	}
 
-	virtual ~BlitTransRemapDest() override final = default;
+	virtual ~BlitTransLucent75ZRead() override final = default;
 
 	virtual void Blit_Copy(void* dst, byte* src, int len, int zval, WORD* zbuf, WORD* abuf, int alvl, int warp) override final
 	{
@@ -21,8 +22,13 @@ public:
 
 		while (len--)
 		{
-			if (*src++)
-				*dest = RemapDest[*dest];
+			WORD zbufv = *zbuf++;
+			if (zval < zbufv)
+			{
+				if (byte idx = *src)
+					*dest = 3 * (Mask & (*dest >> 2)) + (Mask & (PaletteData[idx] >> 2));
+			}
+			++src;
 			++dest;
 		}
 	}
@@ -43,5 +49,6 @@ public:
 	}
 
 private:
-	T* RemapDest;
+	T* PaletteData;
+	WORD Mask;
 };

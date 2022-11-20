@@ -60,8 +60,8 @@ public:
 	virtual void UnPanic() RX; //never
 	virtual void PlayIdleAnim(int nIdleAnimNumber) RX;
 	virtual DWORD vt_entry_524() R0;
-	virtual DWORD vt_entry_528 ( DWORD dwUnk, DWORD dwUnk2, DWORD dwUnk3 ) const R0;
-	virtual DWORD vt_entry_52C(DWORD dwUnk, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4) const R0;
+	virtual DWORD vt_entry_528(TypeList<BuildingTypeClass*>* bList, DWORD dwUnk2, DWORD dwUnk3) const R0;
+	virtual BuildingClass* vt_entry_52C(BuildingTypeClass* bType, DWORD dwUnk2, DWORD dwUnk3, int* dwUnk4) const R0;
 	virtual DWORD vt_entry_530(DWORD dwUnk, DWORD dwUnk2, DWORD dwUnk3) const R0;
 	virtual void vt_entry_534(DWORD dwUnk, DWORD dwUnk2) RX;
 	virtual int GetCurrentSpeed() const R0;

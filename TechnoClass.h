@@ -699,7 +699,7 @@ public:
 	DWORD            unknown_4F4;
 	bool             unknown_bool_4F8;
 	DWORD            unknown_4FC;	//gets initialized with the current Frame, but this is NOT a TimerStruct!
-	DWORD            unknown_500;
+	TechnoClass*     unknown_500;
 	DWORD            EMPLockRemaining;
 	DWORD            ThreatPosed; // calculated to include cargo etc
 	DWORD            ShouldLoseTargetNow;

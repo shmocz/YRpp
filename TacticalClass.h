@@ -21,6 +21,8 @@ class NOVTABLE TacticalClass : public AbstractClass
 public:
 	static constexpr reference<TacticalClass*, 0x887324u> const Instance{};
 
+	virtual bool sub_6DBB60(CoordStruct const& a2, CoordStruct const& a3, COLORREF a4, DWORD dwUnk) R0;
+
 	void SetTacticalPosition(CoordStruct* pCoord)
 		{ JMP_THIS(0x6D6070); }
 

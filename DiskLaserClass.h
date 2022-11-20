@@ -18,6 +18,9 @@ public:
 	// static
 	static constexpr constant_ptr<DynamicVectorClass<DiskLaserClass*>, 0x8A0208u> const Array{};
 
+	static constexpr auto Radius = 240;
+	static constexpr reference<Point2D, 0x8A0180u, 16> DrawCoords {};
+
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 

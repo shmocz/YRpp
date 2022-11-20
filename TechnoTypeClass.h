@@ -91,7 +91,7 @@ public:
 		return -1;
 	}
 
-	static auto const MaxWeapons = 18;
+	static constexpr auto MaxWeapons = 18;
 
 	//IPersistStream
 	virtual HRESULT __stdcall Load(IStream* pStm) R0;

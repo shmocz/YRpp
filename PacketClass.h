@@ -6,6 +6,8 @@
 class FieldClass
 {
 public:
+	FieldClass() = default;
+
 	FieldClass(char* id, CHAR data)
 		{ JMP_THIS(0x4CB580); }
 
@@ -57,10 +59,10 @@ public:
 		this->Head = pField;
 	}
 
-	template<typename T, typename... TArgs>
-	void AddField(TArgs&&... args)
+	template<typename T, typename... Args>
+	void AddField(char* id, T data, Args... args)
 	{
-		auto pField = GameCreate<FieldClass>(std::forward<TArgs>(args)...);
+		auto pField = GameCreate<FieldClass>(id, data, args...);
 		this->AddField(pField);
 	}
 

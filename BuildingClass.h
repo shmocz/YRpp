@@ -303,12 +303,12 @@ public:
 	AudioController Audio8;
 
 	bool WasOnline; // the the last state when Update()ing. if this changed since the last Update(), UpdatePowered is called.
-	bool ShowRealName;
-	bool BeingProduced;
-	bool ShouldRebuild;
+	bool ShowRealName; // is also NOMINAL under [Structures]
+	bool BeingProduced; // is also AI_REBUILDABLE under [Structures]
+	bool ShouldRebuild; // is also AI_REPAIRABLE under [Structures]
 	bool HasEngineer; // used to pass the NeedsEngineer check
 	CDTimerClass CashProductionTimer;
-	bool unknown_bool_6DC;
+	bool AI_Sellable; // AI_SELLABLE under [Structures]
 	bool IsReadyToCommence;
 	bool NeedsRepairs; // AI handholder for repair logic,
 	bool C4Applied;

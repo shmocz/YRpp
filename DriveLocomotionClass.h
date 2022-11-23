@@ -43,7 +43,7 @@ public:
 	bool IsDriving;
 	bool IsRocking;
 	bool IsLocked;
-	AbstractClass* Raider;
+	ILocomotion* Piggybackee;
 	int field_6C;
 };
 

@@ -96,7 +96,7 @@ public:
 	BYTE unknown_91;
 	BYTE unknown_92;
 	BYTE unknown_93;
-	AbstractClass* Raider;
+	ILocomotion* Piggybackee;
 };
 
 static_assert(sizeof(JumpjetLocomotionClass) == 0x98);

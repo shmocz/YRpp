@@ -165,7 +165,7 @@ public:
 	double          SpeedPercentage;
 	double          SpeedMultiplier;
 	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, unknown_abstract_array_588);
-	DWORD           unknown_5A0;
+	AbstractClass*  unknown_5A0;
 	AbstractClass*  Destination; // possibly other objects as well
 	AbstractClass*  LastDestination;
 	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, unknown_abstract_array_5AC);

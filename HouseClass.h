@@ -365,15 +365,7 @@ public:
 	static bool __fastcall IsPlayerAtType(int at)
 	{
 		// JMP_STD(0x510F60);
-		return
-			at == PlayerAtA ||
-			at == PlayerAtB ||
-			at == PlayerAtC ||
-			at == PlayerAtD ||
-			at == PlayerAtE ||
-			at == PlayerAtF ||
-			at == PlayerAtG
-			;
+		return at >= PlayerAtA && at <= PlayerAtH;
 	}
 	static HouseClass* __fastcall FindByPlayerAt(int at)
 		{ JMP_STD(0x510ED0); }

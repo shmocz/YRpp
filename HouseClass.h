@@ -6,8 +6,9 @@
 
 #include <AircraftTypeClass.h>
 #include <BuildingClass.h>
-#include <InfantryTypeClass.h>
 #include <HouseTypeClass.h>
+#include <InfantryTypeClass.h>
+#include <ScenarioClass.h>
 #include <SessionClass.h>
 #include <SideClass.h>
 #include <UnitClass.h>
@@ -410,6 +411,15 @@ public:
 	static void __fastcall LoadFromINIList(CCINIClass *pINI)
 		{ JMP_STD(0x5009B0); }
 
+	int GetSpawnPosition() {
+		ScenarioClass* pScenario = ScenarioClass::Instance;
+		for (int i = 0; i < 8; i++)
+		{
+			if (HouseClass::Array->GetItemOrDefault(pScenario->HouseIndices[i], nullptr) == this)
+				return i;
+		}
+		return -1;
+	}
 
 	WaypointClass * GetPlanningWaypointAt(CellStruct *coords)
 		{ JMP_THIS(0x5023B0); }

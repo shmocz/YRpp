@@ -616,6 +616,9 @@ public:
 	int AI_BaseConstructionUpdate()
 		{ JMP_THIS(0x4FE3E0); }
 
+	int AI_VehicleConstructionUpdate()
+		{ JMP_THIS(0x4FEA60); }
+
 	void AI_TryFireSW()
 		{ JMP_THIS(0x5098F0); }
 

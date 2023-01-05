@@ -49,3 +49,10 @@ public:
 
 static_assert(sizeof(DriveLocomotionClass) == 0x70);
 
+template<>
+__forceinline DriveLocomotionClass* locomotion_cast<DriveLocomotionClass*>(ILocomotion* pThis)
+{
+	CLSID locoCLSID;
+	return (SUCCEEDED(static_cast<LocomotionClass*>(pThis)->GetClassID(&locoCLSID)) && locoCLSID == LocomotionClass::CLSIDs::Drive) ?
+		static_cast<DriveLocomotionClass*>(pThis) : nullptr;
+}

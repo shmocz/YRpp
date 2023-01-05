@@ -11,11 +11,8 @@ class CCINIClass;
 class MissionControlClass
 {
 	public:
-		static MissionControlClass* Array()
-			{ return reinterpret_cast<MissionControlClass*>(0xA8E3A8); }
-
-		static const char** Names()
-			{ return reinterpret_cast<const char**>(0x816CAC); }
+		static constexpr reference<MissionControlClass, 0xA8E3A8, 0x20> const Array {};
+		static constexpr reference<const char*, 0xA8E3A8, 0x20> const Names {};
 
 		static MissionControlClass* __fastcall Find(const char* pName)
 			{ JMP_STD(0x5B3910); }

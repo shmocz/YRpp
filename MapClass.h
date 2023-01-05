@@ -147,7 +147,7 @@ public:
 		{ JMP_THIS(0x55BAE0); }
 
 	void Update()
-		{ JMP_THIS(0x55BAE0); }
+		{ JMP_THIS(0x55AFB0); }
 };
 
 class NOVTABLE MapClass : public GScreenClass

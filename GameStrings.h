@@ -35,6 +35,8 @@ namespace GameStrings
 	GAMEMD_STRING(CombatDamage, 0x839E8Cu);
 	GAMEMD_STRING(Radiation   , 0x839E80u);
 	GAMEMD_STRING(ToolTips    , 0x833188u);
+	GAMEMD_STRING(CrateRules  , 0x839E9Cu);
+	GAMEMD_STRING(JumpjetControls,0x839D58u);
 
 	// EVA entry names
 	GAMEMD_STRING(EVA_StructureSold      , 0x819030u);
@@ -53,6 +55,7 @@ namespace GameStrings
 	GAMEMD_STRING(TXT_SAVING_GAME      , 0x820DD4);
 	GAMEMD_STRING(TXT_GAME_WAS_SAVED   , 0x829FE0);
 	GAMEMD_STRING(TXT_ERROR_SAVING_GAME, 0x829EBC);
+	GAMEMD_STRING(GUI_DEBUG            , 0x827AF8);
 
 	// ....
 }

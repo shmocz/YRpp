@@ -453,6 +453,9 @@ public:
 	LightConvertClass* GetDrawer() const
 		{ JMP_THIS(0x705D70); }
 
+	int CombatDamage(int nWeaponIndex) const
+		{ JMP_THIS(0x6F3970); }
+
 	int GetIonCannonValue(AIDifficulty difficulty) const;
 
 	int GetIonCannonValue(AIDifficulty difficulty, int maxHealth) const {

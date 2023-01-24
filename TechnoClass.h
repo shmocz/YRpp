@@ -453,6 +453,15 @@ public:
 	LightConvertClass* GetDrawer() const
 		{ JMP_THIS(0x705D70); }
 
+	int GetEffectTintIntensity(int currentIntensity)
+		{ JMP_THIS(0x70E360); }
+
+	int GetInvulnerabilityTintIntensity(int currentIntensity)
+		{ JMP_THIS(0x70E380); }
+
+	int GetAirstrikeTintIntensity(int currentIntensity)
+		{ JMP_THIS(0x70E4B0); }
+
 	int CombatDamage(int nWeaponIndex) const
 		{ JMP_THIS(0x6F3970); }
 

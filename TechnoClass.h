@@ -465,6 +465,9 @@ public:
 	int CombatDamage(int nWeaponIndex) const
 		{ JMP_THIS(0x6F3970); }
 
+	WeaponStruct* GetPrimaryWeapon() const
+		{ JMP_THIS(0x70E1A0); }
+
 	int GetIonCannonValue(AIDifficulty difficulty) const;
 
 	int GetIonCannonValue(AIDifficulty difficulty, int maxHealth) const {

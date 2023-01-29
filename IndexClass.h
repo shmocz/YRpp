@@ -190,7 +190,7 @@ constexpr bool IndexClass<TKey, TValue>::AddIndex(TKey id, const TValue& data)
 {
 	if (IndexCount + 1 > IndexSize)
 	{
-		if (!IncreaseTableSize(IndexSize == 0 ? 10 : > IndexSize))
+		if (!IncreaseTableSize(IndexSize == 0 ? 10 : IndexSize))
 			return false;
 	}
 

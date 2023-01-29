@@ -1,8 +1,6 @@
 #pragma once
 
-#if _HAS_CXX20
-#message "Please update this file with STL library <bit>!"
-#endif
+// Please update this file with STL library <bit>!
 
 enum class DirType : unsigned char;
 

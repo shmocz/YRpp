@@ -311,7 +311,7 @@ public:
 	virtual bool UpdateIdleAction() R0;
 	virtual void vt_entry_47C(DWORD dwUnk) RX;
 	virtual void SetDestination(AbstractClass* pDest, bool bUnk) RX;
-	virtual bool vt_entry_484(DWORD dwUnk, DWORD dwUnk2) R0;
+	virtual bool EnterIdleMode(bool initial, bool unused) R0;
 	virtual void UpdateSight(DWORD dwUnk, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4, DWORD dwUnk5) RX;
 	virtual void vt_entry_48C(DWORD dwUnk, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4) RX;
 	virtual bool ForceCreate(CoordStruct& coord, DWORD dwUnk = 0) R0;

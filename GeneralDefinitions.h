@@ -1666,6 +1666,16 @@ enum class RGBMode : unsigned int
 	Invalid = 0x0FFFFFFFF
 };
 
+enum class ZoneType : int
+{
+	None = -1,
+	Core = 0,
+	North = 1,
+	East = 2,
+	South = 3,
+	West = 4
+};
+
 //Westwood custom messages (e.g. for SendMessage)
 #define	WW_SLIDER_GETVALUE			0x400
 

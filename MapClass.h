@@ -265,6 +265,9 @@ public:
 	CellClass* CellIteratorNext()
 		{ CALL(0x578290); }
 
+	ZoneType GetMapZone(const CellStruct& MapCoords, MovementZone movementZone, bool isBridge)
+		{ JMP_THIS(0x56D230); }
+
 // the key damage delivery
 /*! The key damage delivery function.
 	\param Coords Location of the impact/center of damage.

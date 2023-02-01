@@ -265,7 +265,7 @@ public:
 	CellClass* CellIteratorNext()
 		{ CALL(0x578290); }
 
-	ZoneType GetMapZone(const CellStruct& MapCoords, MovementZone movementZone, bool isBridge)
+	int GetMovementZoneType(const CellStruct& MapCoords, MovementZone movementZone, bool isBridge)
 		{ JMP_THIS(0x56D230); }
 
 // the key damage delivery

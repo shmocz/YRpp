@@ -474,6 +474,9 @@ public:
 	bool ThisShouldNotCloak() const
 		{ JMP_THIS(0x6FBC90); }
 
+	bool Limbo() const
+		{ JMP_THIS(0x6F6AC0); }
+
 	int GetIonCannonValue(AIDifficulty difficulty) const;
 
 	int GetIonCannonValue(AIDifficulty difficulty, int maxHealth) const {

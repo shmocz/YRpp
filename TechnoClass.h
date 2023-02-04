@@ -185,7 +185,7 @@ public:
 	virtual bool ShouldSelfHealOneStep() const R0;
 	virtual bool IsVoxel() const R0;
 	virtual bool vt_entry_29C() R0;
-	virtual bool ShouldBeCloaked() const R0;
+	virtual bool IsReadyToCloak() const R0;
 	virtual bool ShouldNotBeCloaked() const R0;
 	virtual DirStruct* TurretFacing(DirStruct* pBuffer) const R0;
 	virtual bool IsArmed() const R0; // GetWeapon(primary) && GetWeapon(primary)->WeaponType
@@ -467,6 +467,12 @@ public:
 
 	WeaponStruct* GetPrimaryWeapon() const
 		{ JMP_THIS(0x70E1A0); }
+
+	bool IsThisReadyToCloak() const
+		{ JMP_THIS(0x6FBDC0); }
+
+	bool ThisShouldNotCloak() const
+		{ JMP_THIS(0x6FBC90); }
 
 	int GetIonCannonValue(AIDifficulty difficulty) const;
 

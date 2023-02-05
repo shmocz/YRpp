@@ -5,7 +5,7 @@
 #pragma once
 
 #include <AbstractTypeClass.h>
-#include <Helpers\String.h>
+#include <Helpers/String.h>
 
 class AircraftTypeClass;
 class InfantryTypeClass;

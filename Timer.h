@@ -8,7 +8,7 @@ public:
 	int : 32; // timer
 	int TimeLeft { 0 };
 
-	constexpr CDTimerClass() = default;
+	CDTimerClass() = default;
 	CDTimerClass(int duration) { this->Start(duration); }
 
 	void Start(int duration)
@@ -99,7 +99,7 @@ class RateTimer : public CDTimerClass
 public:
 	int Rate { 0 };
 
-	constexpr RateTimer() = default;
+	RateTimer() = default;
 	RateTimer(int rate) { this->Rate = rate; this->Start(rate); }
 
 	void Start(int rate)

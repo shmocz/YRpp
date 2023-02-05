@@ -195,7 +195,7 @@ static inline T* DLLCreateArray(size_t capacity, TArgs&&... args) {
 	static_assert(std::is_constructible<T, TArgs...>::value, "Cannot construct T from TArgs.");
 
 	std::allocator<T> alloc;
-	return Memory::CreateArray<T>(alloc, capacity, std::forward<TArgs>(args));
+	return Memory::CreateArray<T>(alloc, capacity, std::forward<TArgs>(args)...);
 }
 
 template<typename T>

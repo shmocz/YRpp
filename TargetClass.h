@@ -109,6 +109,8 @@ public:
 	// [implicit] operator T*()
 
 	// template helper
+
+#ifdef _MSC_VER
 	template<typename T> T* As() { static_assert(false); }
 
 #define DECLARE_CONVENTION_(name, T, addr) \
@@ -141,6 +143,7 @@ public:
 
 #undef DECLARE_CONVENTION
 #undef DECLARE_CONVENTION_
+#endif
 
 	int m_ID;
 	unsigned char m_RTTI;

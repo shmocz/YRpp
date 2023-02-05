@@ -137,4 +137,30 @@ MSVC++
 #define VAR32_REG(type,name,reg) type name;_asm{mov name, reg}
 #define VAR8_REG(type,name,reg) type name;_asm{mov name, reg}
 
+#else
+#define JMP(address) \
+	asm("mov eax, " # address); \
+	asm("jmp eax")
+
+#define EPILOG_THISCALL \
+	asm("pop ecx"); \
+	asm("mov esp, ebp"); \
+	asm("pop ebp")
+
+#define JMP_THIS(address) \
+	{ EPILOG_THISCALL; \
+	JMP(address); }
+
+
+#define JMP_STD(...)
+#define PUSH_IMM(...)
+#define PUSH_VAR32(...)
+#define PUSH_VAR64(...)
+#define SET_REG32(...)
+#define CALL(...)
+#define THISCALL(...)
+#define PUSH_VAR8(...)
+#define THISCALL_EX(...)
+#define MEM_WRITEIMM32(...)
+#define VAR8_REG(type,name, reg) type name; return name
 #endif

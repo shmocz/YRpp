@@ -6,7 +6,7 @@
 #include <ArrayClasses.h>
 #include <IndexClass.h>
 
-#include <Helpers\CompileTime.h>
+#include <Helpers/CompileTime.h>
 
 //forward declarations
 class TechnoClass;

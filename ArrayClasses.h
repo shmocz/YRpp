@@ -197,7 +197,7 @@ public:
 	constexpr DynamicVectorClass() noexcept = default;
 
 	explicit DynamicVectorClass(int capacity, T* pMem = nullptr)
-		: VectorClass(capacity, pMem)
+		: VectorClass<T>(capacity, pMem)
 	{ }
 
 	DynamicVectorClass(const DynamicVectorClass &other) {

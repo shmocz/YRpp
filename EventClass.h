@@ -180,18 +180,25 @@ public:
 	static constexpr reference<DWORD, 0xB04474, 256> const LatestFramesCRC{};
 	static constexpr reference<DWORD, 0xAC51FC> const CurrentFrameCRC{};
 
-	static bool AddEvent(const EventClass& event)
+	static bool AddEvent(const EventClass& event, int time)
 	{
 		if (OutList->Count >= 128)
 			return false;
 
 		OutList->List[OutList->Tail] = event;
 
-		OutList->Timings[OutList->Tail] = static_cast<int>(Imports::TimeGetTime());
+		OutList->Timings[OutList->Tail] = time;
 
 		++OutList->Count;
 		OutList->Tail = (OutList->Tail + 1) & 127;
+		return true;
 	}
+
+	static bool AddEvent(const EventClass& event)
+	{
+		return AddEvent(event, static_cast<int>(Imports::TimeGetTime()));
+	}
+
 
 	// Special
 	explicit EventClass(int houseIndex, int id)
@@ -299,6 +306,8 @@ public:
 	{
 		return memcmp(this, &q, sizeof(q)) == 0;
 	};
+
+	explicit EventClass(EventType e, bool IsExecuted, char HouseIndex, unsigned int Frame) : Type(e), IsExecuted(IsExecuted), HouseIndex(HouseIndex), Frame(Frame) {}
 };
 #pragma pack(pop)
 

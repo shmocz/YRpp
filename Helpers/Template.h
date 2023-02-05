@@ -9,6 +9,7 @@
 
 // return functors
 
+#ifdef _MSC_VER
 // set EAX to smth, return to smth
 template<typename T>
 class retfunc {
@@ -46,6 +47,7 @@ public:
 		return choose ? retAddr : negAddr;
 	}
 };
+#endif
 
 // invalid pointers
 

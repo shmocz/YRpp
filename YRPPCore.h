@@ -8,7 +8,9 @@ typedef unsigned long DWORD;
 #include <Fundamentals.h>
 
 //Syringe interaction header - also includes <windows.h>
+#ifdef _MSC_VER
 #include <Syringe.h>
+#endif
 
 //Assembly macros
 #include <ASMMacros.h>
@@ -64,4 +66,6 @@ virtual void alla(double malla) RX;
 #define VTABLE_SET(item, addr) ((int*)item)[0] = addr
 #define VTABLE_GET(item) (((int*)item)[0])
 
-struct noinit_t final {};
+ #ifndef _MSC_VER
+ #define __interface struct
+ #endif

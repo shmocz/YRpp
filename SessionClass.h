@@ -5,7 +5,12 @@
 #include <GeneralDefinitions.h>
 #include <IPX.h>
 #include <MPGameModeClass.h>
+
+#ifdef _MSC_VER
 #include <WinSock.h>
+#else
+#include <winsock.h>
+#endif
 
 #include <Helpers/CompileTime.h>
 

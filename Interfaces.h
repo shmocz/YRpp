@@ -1,7 +1,11 @@
 #pragma once
 
 #include <windows.h>
+#ifdef _MSVC
 #include <atlbase.h>
+#else
+#include <unknwn.h>
+#endif
 #include <GeneralDefinitions.h>
 
 __interface __declspec(uuid("5FF0CA70-8B12-11D1-B708-00A024DDAFD1"))
@@ -85,6 +89,9 @@ typedef struct tagCONNECTDATA
 	IUnknown* pUnk;
 	unsigned long dwCookie;
 }	CONNECTDATA;
+*/
+
+struct CONNECTDATA;
 
 __interface __declspec(uuid("B196B287-BAB4-101A-B69C-00AA00341D07"))
 IEnumConnections : IUnknown
@@ -94,6 +101,8 @@ IEnumConnections : IUnknown
 	virtual HRESULT __stdcall Reset() = 0;
 	virtual HRESULT __stdcall Clone(IEnumConnections** ppEnum) = 0;
 };
+
+// __interface IConnectionPoint;
 
 __interface IConnectionPointContainer;
 __interface __declspec(uuid("B196B286-BAB4-101A-B69C-00AA00341D07"))
@@ -122,6 +131,7 @@ IEnumConnectionPoints : IUnknown
 	virtual HRESULT __stdcall Reset() = 0;
 	virtual HRESULT __stdcall Clone(IEnumConnectionPoints** ppEnum) = 0;
 };
+/*
 */
 __interface __declspec(uuid("96F02EC7-6FE8-11D1-B6FD-00A024DDAFD1"))
 IGameMap : IUnknown

@@ -600,8 +600,12 @@ public:
 	TChar* Buffer { nullptr };
 };
 
+// The declspec thing causes compiler crash
 template<typename TChar, typename TCharTrait>
-__declspec(selectany) const Wstring_base<TChar, TCharTrait> Wstring_base<TChar, TCharTrait>::EmptyString;
+#ifndef __MINGW32__
+__declspec(selectany)
+#endif
+const Wstring_base<TChar, TCharTrait> Wstring_base<TChar, TCharTrait>::EmptyString;
 
 using Wstring = Wstring_base<char, CharTrait>;
 using WideWstring = Wstring_base<wchar_t, WCharTrait>;

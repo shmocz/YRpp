@@ -108,7 +108,9 @@ public:
 	{
 		double* pdDefault = &dDefault;
 		PUSH_VAR64(pdDefault); PUSH_VAR32(pKey); PUSH_VAR32(pSection); THISCALL(0x5283D0);
+		#ifdef _MSC_VER
 		_asm {fstp dDefault};
+		#endif
 		return dDefault;
 	}
 	void GetDouble(const char* pSection, const char* pKey, double& nValue)
@@ -292,7 +294,7 @@ public:
 	template <size_t Size>
 	constexpr int ReadUnicodeString(const char* pSection, const char* pKey, const wchar_t* pDefault, wchar_t(&pBuffer)[Size])
 	{
-		this->ReadUnicodeString(pSection, pKey, pDefault, Size);
+		return this->ReadUnicodeString(pSection, pKey, pDefault, pBuffer, Size);
 	}
 
 

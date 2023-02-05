@@ -2,7 +2,7 @@
 
 #include <type_traits>
 
-struct noinit_t;
+struct noinit_t final {};
 
 // defines a compile time pointer to a known memory address
 template <typename T, unsigned int Address>
@@ -128,7 +128,7 @@ public:
 	}
 
 	decltype(auto) operator->() const noexcept {
-		return arrow(std::is_pointer<T>::type());
+		return arrow(typename std::is_pointer<T>::type());
 	}
 
 	decltype(auto) operator*() const noexcept {

@@ -248,7 +248,8 @@ public:
 	}
 
 	// Unknown_Tuple
-	explicit EventClass(int houseIndex, EventType eventType, int unknown_0, int unknown_4, int unknown_c)
+	// NB. unknown_c set to void* to avoit conflict with PRODUCTION
+	explicit EventClass(int houseIndex, EventType eventType, int unknown_0, int unknown_4, void* unknown_c)
 	{
 		JMP_THIS(0x4C6A60);
 	}

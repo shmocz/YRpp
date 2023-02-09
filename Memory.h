@@ -2,7 +2,8 @@
 
 #include <ASMMacros.h>
 
-#include <stdlib.h>
+#include <cstdlib>
+#include <cstring>
 
 #include <memory>
 #include <type_traits>

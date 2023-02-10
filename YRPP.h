@@ -7,6 +7,12 @@
 
 #pragma once
 
+#ifdef __MINGW32__
+#ifndef YRPP_ENABLE_WARNINGS
+#include <gcc_ignore_warnings.h>
+#endif
+#endif
+
 #include <YRPPCore.h>
 #include <FileSystem.h>
 #include <StringTable.h>
@@ -16,3 +22,11 @@
 #include <CommandClass.h>
 #include <GameClasses.h>
 #include <SwizzleManagerClass.h>
+#include <ProgressScreenClass.h>
+#include <EventClass.h>
+
+#ifdef __MINGW32__
+#ifndef YRPP_ENABLE_WARNINGS
+#include <gcc_restore_warnings.h>
+#endif
+#endif

@@ -7,7 +7,7 @@
 
 #pragma once
 
-#ifdef __MINGW32__
+#ifdef __GNUC__
 #ifndef YRPP_ENABLE_WARNINGS
 #include <gcc_ignore_warnings.h>
 #endif
@@ -25,7 +25,7 @@
 #include <ProgressScreenClass.h>
 #include <EventClass.h>
 
-#ifdef __MINGW32__
+#ifdef __GNUC__
 #ifndef YRPP_ENABLE_WARNINGS
 #include <gcc_restore_warnings.h>
 #endif

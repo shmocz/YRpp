@@ -155,14 +155,14 @@ union EventData
 
 class EventClass;
 
-template<size_t Length>
+template<size_t Length, typename T = EventClass>
 struct EventList
 {
 public:
 	int Count;
 	int Head;
 	int Tail;
-	EventClass List[Length];
+	T List[Length];
 	int Timings[Length];
 };
 
@@ -287,12 +287,12 @@ public:
 
 	explicit EventClass(const EventClass& another)
 	{
-		memcpy(this, &another, sizeof(*this));
+		std::memcpy(this, &another, sizeof(*this));
 	}
 
 	EventClass& operator=(const EventClass& another)
 	{
-		memcpy(this, &another, sizeof(*this));
+		std::memcpy(this, &another, sizeof(*this));
 		return *this;
 	}
 

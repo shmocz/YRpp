@@ -59,7 +59,7 @@ private:
 	char Dummy;
 };
 
-__declspec(selectany) int(__cdecl* CharTrait::Format)(char*, const char*, ...) = sprintf;
+// __declspec(selectany) int(__cdecl* CharTrait::Format)(char*, const char*, ...) = sprintf;
 __declspec(selectany) const char* CharTrait::IntegerFormatString = "%d";
 __declspec(selectany) const char* CharTrait::LeadingZeroIntegerFormatString = "%%0%dd";
 __declspec(selectany) char CharTrait::Null = '\0';
@@ -120,7 +120,7 @@ private:
 	char Dummy;
 };
 
-__declspec(selectany) int(__cdecl* WCharTrait::Format)(wchar_t*, const wchar_t*, ...) = swprintf;
+//__declspec(selectany) int(__cdecl* WCharTrait::Format)(wchar_t*, const wchar_t*, ...) = swprintf;
 __declspec(selectany) const wchar_t* WCharTrait::IntegerFormatString = L"%d";
 __declspec(selectany) const wchar_t* WCharTrait::LeadingZeroIntegerFormatString = L"%%0%dd";
 __declspec(selectany) wchar_t WCharTrait::Null = L'\0';
@@ -348,7 +348,7 @@ public:
 		{
 			for (size_t len = Length(); p; p = TCharTraits().Find(Buffer, ch))
 			{
-				memcpy(p, p + 1, Buffer - p + len-- - 1);
+				std::memcpy(p, p + 1, Buffer - p + len-- - 1);
 				Buffer[len] = TCharTraits::Null;
 			}
 

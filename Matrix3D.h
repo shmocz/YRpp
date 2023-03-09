@@ -63,7 +63,7 @@ public:
 	// copy ctor
 	Matrix3D(const Matrix3D& another)
 	{
-		memcpy(this, &another, sizeof(Matrix3D));
+		std::memcpy(this, &another, sizeof(Matrix3D));
 		// JMP_THIS(0x5AE610);
 	}
 
@@ -71,7 +71,7 @@ public:
 
 	Matrix3D& operator=(const Matrix3D& another)
 	{
-		memcpy(this, &another, sizeof(Matrix3D));
+		std::memcpy(this, &another, sizeof(Matrix3D));
 		return *this;
 	}
 

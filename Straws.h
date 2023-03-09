@@ -80,7 +80,7 @@ public:
 			}
 
 			if (slen > 0)
-				memcpy(pBuffer, (char*)this->Buffer.Buffer + this->Index, slen);
+				std::memcpy(pBuffer, (char*)this->Buffer.Buffer + this->Index, slen);
 
 			this->Index += slen;
 			return slen;

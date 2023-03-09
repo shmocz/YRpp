@@ -92,7 +92,7 @@ public:
 					nLength = nResidue;
 			}
 			if (nLength > 0)
-				memcpy((char*)this->Buffer.Buffer + this->Index, pSource, nLength);
+				std::memcpy((char*)this->Buffer.Buffer + this->Index, pSource, nLength);
 
 			this->Index += nLength;
 			return nLength;

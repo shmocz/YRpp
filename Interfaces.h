@@ -1,10 +1,10 @@
 #pragma once
 
 #include <windows.h>
-#ifdef _MSVC
-#include <atlbase.h>
-#else
+#if defined(_MSC_VER) || defined(__MINGW32__)
 #include <unknwn.h>
+#else
+#error No suitable compiler found
 #endif
 #include <GeneralDefinitions.h>
 

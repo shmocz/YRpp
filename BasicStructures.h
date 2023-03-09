@@ -20,7 +20,7 @@ struct ColorStruct
 	inline explicit ColorStruct(Color16Struct const color);
 
 	explicit ColorStruct(DWORD const color) {
-		memcpy(this, &color, sizeof(ColorStruct));
+		std::memcpy(this, &color, sizeof(ColorStruct));
 	}
 
 	inline explicit ColorStruct(WORD const color);
@@ -35,7 +35,7 @@ struct ColorStruct
 
 	explicit operator DWORD() const {
 		DWORD ret = 0;
-		memcpy(&ret, this, sizeof(ColorStruct));
+		std::memcpy(&ret, this, sizeof(ColorStruct));
 		return ret;
 	}
 
@@ -100,7 +100,7 @@ struct Color16Struct
 	{ }
 
 	explicit Color16Struct(WORD const color) {
-		memcpy(this, &color, sizeof(Color16Struct));
+		std::memcpy(this, &color, sizeof(Color16Struct));
 	}
 
 	explicit Color16Struct(DWORD const color)
@@ -117,7 +117,7 @@ struct Color16Struct
 
 	explicit operator WORD() const {
 		WORD ret;
-		memcpy(&ret, this, sizeof(Color16Struct));
+		std::memcpy(&ret, this, sizeof(Color16Struct));
 		return ret;
 	}
 

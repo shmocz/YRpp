@@ -151,6 +151,11 @@ union EventData
 		AbstractType RTTIType;
 		int ID;
 	} Specific;
+
+	struct
+	{
+		CellStruct Cell;
+	} SellCell;
 };
 
 class EventClass;

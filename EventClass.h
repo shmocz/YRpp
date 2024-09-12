@@ -79,6 +79,16 @@ union EventData
 
 	struct
 	{
+		TargetClass Whom;
+	} Deploy;
+
+	struct
+	{
+		TargetClass Whom;
+	} Sell;
+
+	struct
+	{
 		unsigned int CRC;
 		unsigned short CommandCount;
 		unsigned char Delay;
